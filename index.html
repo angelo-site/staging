@@ -216,7 +216,9 @@
     </footer>
 
     <!-- SCRIPT -->
-    <script src="content.js"></script>
+    <script>
+	  document.write('<script src="content.js?v=' + Date.now() + '"><\/script>');
+	</script>
     <script>
         // Função para abrir/fechar menu mobile
         function toggleMenu() {

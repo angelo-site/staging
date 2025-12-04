@@ -66,6 +66,6 @@ const siteContent = {
         "imagens/obra3.jpg",
         "imagens/obra4.jpg",
         "imagens/obra5.jpg",
-        "imagens/obra6.jpg"
+        "imagens/obra7.jpg"
     ]
 };

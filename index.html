@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construtirso - Construção Civil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --color-primary: #1a1a1a;    
+            --color-secondary: #f4f4f4;  
+            --color-accent: #d35400;     
+            --color-text: #333;
+            --font-head: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            --header-height: 80px; /* Definir altura fixa para scroll correto */
+        }
+
+        /* --- RESET & BASIC --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; /* Faz o scroll deslizar suavemente */ }
+        body { font-family: var(--font-body); color: var(--color-text); line-height: 1.6; background: #fff; padding-top: var(--header-height); }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img { width: 100%; display: block; object-fit: cover; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* --- HEADER / NAV --- */
+        header { 
+            background: #fff; 
+            height: var(--header-height);
+            border-bottom: 1px solid #eee; 
+            position: fixed; /* Fixo no topo */
+            top: 0; 
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-flex { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            width: 100%;
+        }
+        
+        .logo-wrapper { display: flex; align-items: center; gap: 15px; z-index: 1001; }
+        .logo-img { height: 45px; width: auto; }
+        .company-name-header { font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* DESKTOP MENU */
+        .desktop-menu { display: flex; gap: 30px; }
+        .desktop-menu a { font-family: var(--font-head); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; color: var(--color-primary); }
+        .desktop-menu a:hover { color: var(--color-accent); }
+
+        /* HAMBURGER ICON (Mobile Only) */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .bar { width: 25px; height: 3px; background-color: var(--color-primary); transition: 0.3s; }
+
+        .contact-btn { background: var(--color-primary); color: #fff; padding: 10px 20px; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; margin-left: 20px; }
+        .contact-btn:hover { background: var(--color-accent); }
+
+        /* --- MOBILE MENU OVERLAY --- */
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
+            background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px;
+            transition: 0.4s; z-index: 999;
+        }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav a { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
+
+        /* --- HERO SECTION --- */
+        .hero { height: calc(100vh - var(--header-height)); position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 20px; }
+        .hero h1 { font-family: var(--font-head); font-size: 3rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; font-weight: 400; }
+        .cta-btn { background: var(--color-accent); color: #fff; padding: 15px 30px; font-weight: 700; text-transform: uppercase; display: inline-block; transition: transform 0.2s; }
+        .cta-btn:hover { transform: scale(1.05); background: #b54500; }
+
+        /* --- SECTIONS --- */
+        .section { padding: 80px 0; scroll-margin-top: var(--header-height); } /* Ajuste para o scroll não tapar o título */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .section-title { font-family: var(--font-head); font-size: 2.2rem; margin-bottom: 20px; color: var(--color-primary); position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--color-accent); margin-top: 10px; }
+        .about-img { height: 400px; box-shadow: 20px 20px 0px var(--color-secondary); }
+
+        .pillars-section { background: var(--color-secondary); }
+        .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .pillar-card { background: #fff; border-bottom: 4px solid var(--color-accent); transition: transform 0.3s; }
+        .pillar-card:hover { transform: translateY(-5px); }
+        .pillar-img { height: 250px; }
+        .pillar-content { padding: 30px; }
+        .pillar-content h3 { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 15px; }
+
+        .services-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
+        .services-list li { background: #fff; padding: 20px; border-left: 3px solid var(--color-primary); font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; }
+        .gallery-item { height: 300px; cursor: pointer; transition: opacity 0.3s; }
+        .gallery-item:hover { opacity: 0.8; }
+
+        footer { background: var(--color-primary); color: #fff; padding: 60px 0; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .footer-info h4 { margin-bottom: 20px; color: var(--color-accent); }
+
+        /* --- MOBILE MEDIA QUERY --- */
+        @media (max-width: 900px) {
+            .desktop-menu { display: none; } /* Esconde menu texto */
+            .hamburger { display: flex; } /* Mostra 3 barras */
+            .contact-btn { display: none; } /* Esconde botão desktop, pomos no menu mobile */
+            
+            .hero h1 { font-size: 2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .company-name-header { font-size: 1rem; }
+            .logo-img { height: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header>
+        <div class="container nav-flex">
+            <!-- Logo e Nome -->
+            <div class="logo-wrapper">
+                <img id="nav-logo" class="logo-img" src="" alt="Logo">
+                <span id="nav-company-name" class="company-name-header">LOADING...</span>
+            </div>
+
+            <!-- Menu Desktop (Links no meio) -->
+            <nav id="desktop-nav" class="desktop-menu">
+                <!-- JS vai inserir links aqui -->
+            </nav>
+            
+            <!-- Botão Contactar (Desktop) -->
+            <a id="nav-btn" href="#contact" class="contact-btn">Contactar</a>
+
+            <!-- Ícone Hambúrguer (Mobile) -->
+            <div class="hamburger" onclick="toggleMenu()">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menu Mobile (Slide in) -->
+    <div id="mobile-nav" class="mobile-nav">
+        <!-- JS vai inserir links aqui -->
+        <!-- Botão Contactar Mobile -->
+        <a id="mobile-contact-btn" href="#contact" onclick="toggleMenu()" style="color: var(--color-accent);">Contactar</a>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+        <img id="hero-img" class="hero-bg" src="" alt="Construção">
+        <div class="hero-content">
+            <h1 id="hero-title">...</h1>
+            <p id="hero-subtitle">...</p>
+            <a id="hero-btn" href="#contact" class="cta-btn">...</a>
+        </div>
+    </div>
+
+    <!-- ABOUT (ID adicionado para link funcionar) -->
+    <section id="sobre" class="section container">
+        <div class="about-grid">
+            <div>
+                <h2 id="about-title" class="section-title">...</h2>
+                <p id="about-text">...</p>
+            </div>
+            <img id="about-img" class="about-img" src="" alt="Sobre nós">
+        </div>
+    </section>
+
+    <!-- PILLARS (ID adicionado) -->
+    <section id="estrutura" class="section pillars-section">
+        <div class="container">
+            <h2 class="section-title">A Nossa Estrutura</h2>
+            <div id="pillars-container" class="pillars-grid"></div>
+        </div>
+    </section>
+
+    <!-- SERVICES (ID adicionado) -->
+    <section id="servicos" class="section container">
+        <h2 id="services-title" class="section-title">...</h2>
+        <ul id="services-list" class="services-list"></ul>
+    </section>
+
+    <!-- GALLERY (ID adicionado) -->
+    <section id="galeria" class="section container">
+        <h2 class="section-title">Galeria de Obras</h2>
+        <div id="gallery-container" class="gallery-grid"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <h2 id="footer-logo">...</h2>
+                <p>Qualidade controlada, do primeiro tijolo ao último acabamento.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contactos</h4>
+                <p id="footer-phone">Phone...</p>
+                <p id="footer-email">Email...</p>
+                <p id="footer-address">Address...</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script src="content.js"></script>
+    <script>
+        // Função para abrir/fechar menu mobile
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-nav');
+            menu.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof siteContent === 'undefined') return;
+            const c = siteContent;
+
+            // 1. HEADER (Logo, Nome e Links)
+            document.getElementById('nav-logo').src = c.geral.logo;
+            document.getElementById('nav-company-name').textContent = c.geral.nomeEmpresa;
+            
+            // Gerar Links do Menu (Desktop e Mobile)
+            const links = [
+                { text: c.geral.menu[0], id: "#sobre" },
+                { text: c.geral.menu[1], id: "#estrutura" },
+                { text: c.geral.menu[2], id: "#servicos" },
+                { text: c.geral.menu[3], id: "#galeria" }
+            ];
+
+            const desktopNav = document.getElementById('desktop-nav');
+            const mobileNav = document.getElementById('mobile-nav');
+
+            links.forEach(link => {
+                // Desktop
+                desktopNav.innerHTML += `<a href="${link.id}">${link.text}</a>`;
+                // Mobile (Adiciona evento para fechar menu ao clicar)
+                mobileNav.innerHTML = `<a href="${link.id}" onclick="toggleMenu()">${link.text}</a>` + mobileNav.innerHTML;
+            });
+
+            // Resto dos preenchimentos
+            document.getElementById('nav-btn').href = "tel:" + c.geral.telefone;
+            document.getElementById('mobile-contact-btn').href = "tel:" + c.geral.telefone; // Botão mobile
+
+            document.getElementById('footer-logo').textContent = c.geral.nomeEmpresa;
+            document.getElementById('footer-phone').textContent = "📞 " + c.geral.telefone;
+            document.getElementById('footer-email').textContent = "✉️ " + c.geral.email;
+            document.getElementById('footer-address').textContent = "📍 " + c.geral.morada;
+
+            document.getElementById('hero-title').textContent = c.hero.titulo;
+            document.getElementById('hero-subtitle').textContent = c.hero.subtitulo;
+            document.getElementById('hero-btn').textContent = c.hero.botaoTexto;
+            document.getElementById('hero-btn').href = c.geral.whatsappLink; 
+            document.getElementById('hero-img').src = c.hero.imagemFundo;
+
+            document.getElementById('about-title').textContent = c.sobre.titulo;
+            document.getElementById('about-text').textContent = c.sobre.texto;
+            document.getElementById('about-img').src = c.sobre.imagemLateral;
+
+            const pillarsContainer = document.getElementById('pillars-container');
+            c.pilares.forEach(pilar => {
+                pillarsContainer.innerHTML += `
+                    <div class="pillar-card">
+                        <img src="${pilar.imagem}" class="pillar-img" alt="${pilar.titulo}">
+                        <div class="pillar-content">
+                            <h3>${pilar.titulo}</h3>
+                            <p>${pilar.descricao}</p>
+                        </div>
+                    </div>`;
+            });
+
+            document.getElementById('services-title').textContent = c.servicos.titulo;
+            const servicesContainer = document.getElementById('services-list');
+            c.servicos.lista.forEach(item => {
+                servicesContainer.innerHTML += `<li>${item}</li>`;
+            });
+
+            const galleryContainer = document.getElementById('gallery-container');
+            c.galeria.forEach(img => {
+                galleryContainer.innerHTML += `<img src="${img}" class="gallery-item">`;
+            });
+        });
+    </script>
+</body>
+</html>

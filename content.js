@@ -6,7 +6,7 @@ const siteContent = {
         logo: "imagens/logo.svg",
         telefone: "+351 910 000 000",
         email: "geral@construtirso.pt",
-        morada: "Rua da Construção, nº 10, STirso",
+        morada: "Rua da Construção, nº 10, S.Tirso",
         whatsappLink: "https://wa.me/351910000000",
         
         // NOVO: Textos do Menu de Navegação
@@ -70,3 +70,4 @@ const siteContent = {
     ]
 
 };
+
